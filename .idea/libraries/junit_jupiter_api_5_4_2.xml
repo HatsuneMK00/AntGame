@@ -1,0 +1,19 @@
+<component name="libraryTable">
+  <library name="junit-jupiter-api-5.4.2">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/junit-jupiter-api-5.4.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/junit-jupiter-engine-5.4.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/junit-jupiter-params-5.4.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/junit-platform-commons-1.4.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/junit-platform-engine-1.4.2.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$PROJECT_DIR$/lib/junit-jupiter-api-5.4.2-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/junit-jupiter-engine-5.4.2-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/junit-jupiter-params-5.4.2-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/junit-platform-commons-1.4.2-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/junit-platform-engine-1.4.2-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

@@ -1,8 +1,8 @@
 package xyz.antgame.controller;
 
 public interface UserInterface {
-    void startGames(int incTime);
-    void startGames(int incTime,int antNum);
+    void startGame();
+    void startGames();
     void printResult();
     void inputConfiguration();
 }

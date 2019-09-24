@@ -8,7 +8,7 @@ public class CreepingGame {
 
 
 
-    public int startGame(HashMap<String,Integer> configuration, int[][] results){
+    public int startGame(int[] antStatus, int[][] results){
         return 0;
     }
 
