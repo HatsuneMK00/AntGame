@@ -41,7 +41,7 @@ public class PlayRoom implements UserInterface {
         if((antStatus=buildConfiguration())!=null){
             // CreepingGame 的内部方法需要修改gameStatusResult为一个结果集（二维数组）
 //            creepGame在执行的时候 自己调用一下getIncTime()函数获取incTime 我就不传值了   ---guo
-            gameResult = creepingGame.startGame(antStatus,gameStatusResult);
+//            gameResult = creepingGame.startGame(antStatus,gameStatusResult);
             minTime = Math.min(minTime,gameResult);
             maxTime = Math.max(maxTime,gameResult);
         }
