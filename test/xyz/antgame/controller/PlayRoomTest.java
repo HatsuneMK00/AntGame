@@ -9,9 +9,6 @@ class PlayRoomTest {
     @Test
     void startGames() {
         PlayRoom playRoom = new PlayRoom();
-        playRoom.inputConfiguration();
-        playRoom.startGames();
-        System.out.println(playRoom.getMaxTime());
-        System.out.println(playRoom.getMinTime());
+        playRoom.startSimulation();
     }
 }

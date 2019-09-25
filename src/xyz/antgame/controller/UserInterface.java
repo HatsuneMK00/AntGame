@@ -2,7 +2,7 @@ package xyz.antgame.controller;
 
 public interface UserInterface {
     void startGame();
-    void startGames();
+    void startSimulation();
     void printResult();
     void getInputConfiguration();
 }

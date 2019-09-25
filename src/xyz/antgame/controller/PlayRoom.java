@@ -36,41 +36,80 @@ public class PlayRoom implements UserInterface {
 //    这个函数每按一次按钮调用一次
     @Override
     @RequestMapping("/startGames")
-    public void startGames() {
+    public void startSimulation() {
         if (this.creepingGame == null) {
             // 如果没有creepGame对象 创建一个默认的CreepGame对象
             this.creepingGame = new CreepingGame();
         }
+//        处理请求传来的参数
         this.incTime = 1;
         this.antNum = 5;
-        HashMap<Integer, Integer> antPosition = new HashMap<>();
-        antPosition.put(0, 30);
-        antPosition.put(1, 60);
-
-        ArrayList<Integer[]> gameStatusResult = null;
-        int gameResult = 0;
+        int []antPositions = {30,150,160,170,180};
+        int length = 200;
         int[] antStatus;
-        int[] position;
+//        处理请求结束
+        int gameResult = 0;
+        ArrayList<Integer[]> gameStatusResult = null;
+
         if ((antStatus = buildConfiguration()) != null) {
             // CreepingGame 的内部方法需要修改gameStatusResult为一个结果集（二维数组）
-//            creepGame在执行的时候 自己调用一下getIncTime()函数获取incTime 我就不传值了   ---guo
-            gameResult = creepingGame.startGame(antStatus, gameStatusResult);
+            gameResult = creepingGame.startGame(antStatus,gameStatusResult,antPositions,length,incTime);
+//            测试用
+            System.out.println(gameResult);
+
             minTime = Math.min(minTime, gameResult);
             maxTime = Math.max(maxTime, gameResult);
         }
     }
 
-    //    前端需要提供一个“模拟全部情况”按钮用于执行这个函数
-//    这个方法用于一次性执行完所有可能的情况，只会向前端返回一个结果(最大时间和最小时间)
+    //    前端需要提供一个“自定义游戏”按钮用于执行这个函数
+//    这个方法用于执行用户指定的情况
 //    需要显示过程 调用startGame函数
     @Override
     public void startGame() {
+//        处理请求参数
+        this.incTime = 1;
+        this.antNum = 5;
+        int []antPositions = {30,150,160,170,180};
+        int length = 200;
+        int[] antStatus;
+        int[] antDirections = {-1,1,-1,-1,1};
+//        处理结束
+        int gameResult = 0;
+        ArrayList<Integer[]> gameStatusResult = null;
+
+        gameResult = creepingGame.startGame(antDirections,gameStatusResult,antPositions,length,incTime);
+        System.out.println(gameResult);
 
     }
 
+
+//    当前端选择了直接显示模拟结果的时候 调用这个函数
+//    按照道理来说 对于同一个PlayRoom类对象iterator应该是同一个 因此可以直接在这边继续迭代
     @Override
     public void printResult() {
+//        处理请求参数
+        this.incTime = 1;
+        this.antNum = 5;
+        int []antPositions = {30,150,160,170,180};
+        int length = 200;
+        int[] antStatus;
+        int[] antDirections = {-1,1,-1,-1,1};
+//        处理结束
+        int gameResult;
+        ArrayList<Integer[]> gameStatusResult = null;
 
+        while ((antStatus = buildConfiguration()) != null) {
+            // CreepingGame 的内部方法需要修改gameStatusResult为一个结果集（二维数组）
+            gameResult = creepingGame.startGame(antStatus,gameStatusResult,antPositions,length,incTime);
+//            测试用
+            System.out.println(gameResult);
+
+            minTime = Math.min(minTime, gameResult);
+            maxTime = Math.max(maxTime, gameResult);
+        }
+        System.out.println(minTime);
+        System.out.println(maxTime);
     }
 
     //   use temporary data to simulate

@@ -3,26 +3,10 @@ package xyz.antgame.service;
 import xyz.antgame.controller.PlayRoom;
 import xyz.antgame.controller.UserInterface;
 
-public class UserService implements UserInterface {
-    private PlayRoom playRoom;
+//    这个类感觉应该不需要 用户接口应该有PlayRoom来实现
 
-    @Override
-    public void startGame() {
-
-    }
-
-    @Override
-    public void startGames() {
-
-    }
-
-    @Override
-    public void printResult() {
-
-    }
-
-    @Override
-    public void inputConfiguration() {
-
-    }
-}
+//public class UserService implements UserInterface {
+//    private PlayRoom playRoom;
+//
+//
+//}
