@@ -33,6 +33,7 @@ public class CreepingGame {
 
             }
         }
+        return 0;
     }
     private int validatePosition(Ant ant){
         if(antPositions.get(ant.getPosition())>=2)
@@ -40,5 +41,9 @@ public class CreepingGame {
         if(ant.getPosition()>pole.getLength()||ant.getPosition()<0)
             return -1;
         return 0;
+    }
+
+    public void setAntPositions(HashMap<Integer, Integer> antPositions) {
+        this.antPositions = antPositions;
     }
 }

@@ -4,5 +4,5 @@ public interface UserInterface {
     void startGame();
     void startGames();
     void printResult();
-    void inputConfiguration();
+    void getInputConfiguration();
 }

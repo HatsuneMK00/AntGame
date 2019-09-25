@@ -21,11 +21,15 @@ public class AntStatusIterator implements Iterator {
         int[] antStatus = new int[antNum];
         int i, tempIndex;
         tempIndex = index;
-        for (i = antStatus.length - 1;i>=0;i--){
+        for (i = antStatus.length - 1; i >= 0; i--) {
             antStatus[i] = tempIndex % 2;
             tempIndex /= 2;
         }
         index++;
+        // 为了CreepingGame类的实现方便 这里用1和-1表示方向
+        for (i = 0; i < antStatus.length; i++) {
+            if(antStatus[i] == 0) antStatus[i] = -1;
+        }
         return antStatus;
     }
 }
