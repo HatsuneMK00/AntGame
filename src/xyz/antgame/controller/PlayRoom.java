@@ -49,7 +49,7 @@ public class PlayRoom implements UserInterface {
         int[] antStatus;
 //        处理请求结束
         int gameResult = 0;
-        ArrayList<Integer[]> gameStatusResult = null;
+        ArrayList<Integer[]> gameStatusResult = new ArrayList<Integer[]>();
 
         if ((antStatus = buildConfiguration()) != null) {
             // CreepingGame 的内部方法需要修改gameStatusResult为一个结果集（二维数组）
