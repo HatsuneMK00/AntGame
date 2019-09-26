@@ -29,8 +29,9 @@ public class Ant {
         if(isBeyond()){
             pole.destroyAnt(this);
             position=-1;
+            return position;
         }
-        else if(pole.hasCollision(position))
+        if(pole.hasCollision(position))
             changeDirection();
         pole.positionPlus(position);
         return position;

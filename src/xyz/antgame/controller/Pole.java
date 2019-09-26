@@ -22,6 +22,8 @@ public class Pole {
         map = new int[length+1];
     }
     public boolean hasCollision(int position){
+        if(position==0) return map[position+1]>0;
+        if (position==length) return map[position-1]>0;
         if(map[position-1]+map[position+1]>0) return true;
         if(map[position]>1) return true;
         return false;
