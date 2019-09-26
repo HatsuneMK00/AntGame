@@ -13,7 +13,6 @@ public class CreepingGame {
     }
     public int startGame(int[] antDirections, ArrayList<Integer[]> result,int[] positions,int length,int incTime){
         Integer[] framePositions = new Integer[antDirections.length];
-        result = new ArrayList<>();
         pole = new Pole(length);
         for(int i=0;i<antDirections.length;i++){
             antList.add(new Ant(i,antDirections[i],positions[i],pole));

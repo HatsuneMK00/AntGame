@@ -33,5 +33,6 @@
     <orderEntry type="library" name="junit-jupiter-api-5.4.2" level="project" />
     <orderEntry type="library" name="aopalliance-1.0" level="project" />
     <orderEntry type="library" name="aopalliance-1.0" level="project" />
+    <orderEntry type="library" name="fastjson-1.2.61" level="project" />
   </component>
 </module>

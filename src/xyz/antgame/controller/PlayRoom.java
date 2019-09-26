@@ -58,7 +58,7 @@ public class PlayRoom implements UserInterface {
             // CreepingGame 的内部方法需要修改gameStatusResult为一个结果集（二维数组）
             gameTotalTime = creepingGame.startGame(antStatus,gameStatusResult,antPositions,length,incTime);
 //            测试用
-            System.out.println(gameTotalTime);
+//            System.out.println(gameTotalTime);
 
             minTime = Math.min(minTime, gameTotalTime);
             maxTime = Math.max(maxTime, gameTotalTime);
@@ -95,7 +95,7 @@ public class PlayRoom implements UserInterface {
         ArrayList<Integer[]> gameStatusResult = new ArrayList<>();
 
         gameTotalTime = creepingGame.startGame(antDirections,gameStatusResult,antPositions,length,incTime);
-        System.out.println(gameTotalTime);
+//        System.out.println(gameTotalTime);
 
         GameResultSet gameResultSet = new GameResultSet();
         gameResultSet.setGameDuration(gameTotalTime);
