@@ -67,16 +67,19 @@ public class PlayRoom implements UserInterface {
 //    需要显示过程 调用startGame函数
     @Override
     public void startGame() {
+        if (this.creepingGame == null) {
+            // 如果没有creepGame对象 创建一个默认的CreepGame对象
+            this.creepingGame = new CreepingGame();
+        }
 //        处理请求参数
         this.incTime = 1;
         this.antNum = 5;
         int []antPositions = {30,150,160,170,180};
         int length = 200;
-        int[] antStatus;
         int[] antDirections = {-1,1,-1,-1,1};
 //        处理结束
         int gameResult = 0;
-        ArrayList<Integer[]> gameStatusResult = null;
+        ArrayList<Integer[]> gameStatusResult = new ArrayList<Integer[]>();
 
         gameResult = creepingGame.startGame(antDirections,gameStatusResult,antPositions,length,incTime);
         System.out.println(gameResult);
