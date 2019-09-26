@@ -2,6 +2,8 @@ package xyz.antgame.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import xyz.antgame.domain.GameResultSet;
 import xyz.antgame.iterator.AntStatusIterator;
 
 import javax.management.loading.ClassLoaderRepository;
@@ -31,12 +33,13 @@ public class PlayRoom implements UserInterface {
         return minTime;
     }
 
-    //    前端需要提供 “开始游戏”以及“开始下一个”的按钮用于调用这个函数
+//    前端需要提供 “开始游戏”以及“开始下一个”的按钮用于调用这个函数
 //    开始按钮用get方式请求/startGame
 //    这个函数每按一次按钮调用一次
     @Override
-    @RequestMapping("/startGames")
-    public void startSimulation() {
+    @ResponseBody
+    @RequestMapping("/startSimulation")
+    public GameResultSet startSimulation() {
         if (this.creepingGame == null) {
             // 如果没有creepGame对象 创建一个默认的CreepGame对象
             this.creepingGame = new CreepingGame();
@@ -48,25 +51,38 @@ public class PlayRoom implements UserInterface {
         int length = 200;
         int[] antStatus;
 //        处理请求结束
-        int gameResult = 0;
+        int gameTotalTime = 0;
         ArrayList<Integer[]> gameStatusResult = new ArrayList<Integer[]>();
 
         if ((antStatus = buildConfiguration()) != null) {
             // CreepingGame 的内部方法需要修改gameStatusResult为一个结果集（二维数组）
-            gameResult = creepingGame.startGame(antStatus,gameStatusResult,antPositions,length,incTime);
+            gameTotalTime = creepingGame.startGame(antStatus,gameStatusResult,antPositions,length,incTime);
 //            测试用
-            System.out.println(gameResult);
+            System.out.println(gameTotalTime);
 
-            minTime = Math.min(minTime, gameResult);
-            maxTime = Math.max(maxTime, gameResult);
+            minTime = Math.min(minTime, gameTotalTime);
+            maxTime = Math.max(maxTime, gameTotalTime);
         }
+        GameResultSet gameResultSet = new GameResultSet();
+        gameResultSet.setGameDuration(gameTotalTime);
+        gameResultSet.setGameStatusResult(gameStatusResult);
+        gameResultSet.setMaxTime(maxTime);
+        gameResultSet.setMinTime(minTime);
+
+        return gameResultSet;
     }
 
     //    前端需要提供一个“自定义游戏”按钮用于执行这个函数
 //    这个方法用于执行用户指定的情况
 //    需要显示过程 调用startGame函数
     @Override
-    public void startGame() {
+    @ResponseBody
+    @RequestMapping("/startGame")
+    public GameResultSet startGame() {
+        if (this.creepingGame == null) {
+            // 如果没有creepGame对象 创建一个默认的CreepGame对象
+            this.creepingGame = new CreepingGame();
+        }
 //        处理请求参数
         this.incTime = 1;
         this.antNum = 5;
@@ -75,12 +91,19 @@ public class PlayRoom implements UserInterface {
         int[] antStatus;
         int[] antDirections = {-1,1,-1,-1,1};
 //        处理结束
-        int gameResult = 0;
-        ArrayList<Integer[]> gameStatusResult = null;
+        int gameTotalTime = 0;
+        ArrayList<Integer[]> gameStatusResult = new ArrayList<>();
 
-        gameResult = creepingGame.startGame(antDirections,gameStatusResult,antPositions,length,incTime);
-        System.out.println(gameResult);
+        gameTotalTime = creepingGame.startGame(antDirections,gameStatusResult,antPositions,length,incTime);
+        System.out.println(gameTotalTime);
 
+        GameResultSet gameResultSet = new GameResultSet();
+        gameResultSet.setGameDuration(gameTotalTime);
+        gameResultSet.setGameStatusResult(gameStatusResult);
+        gameResultSet.setMaxTime(-1);
+        gameResultSet.setMinTime(-1);
+
+        return gameResultSet;
     }
 
 
@@ -96,25 +119,26 @@ public class PlayRoom implements UserInterface {
         int[] antStatus;
         int[] antDirections = {-1,1,-1,-1,1};
 //        处理结束
-        int gameResult;
+        int gameTotalTime;
         ArrayList<Integer[]> gameStatusResult = null;
 
         while ((antStatus = buildConfiguration()) != null) {
             // CreepingGame 的内部方法需要修改gameStatusResult为一个结果集（二维数组）
-            gameResult = creepingGame.startGame(antStatus,gameStatusResult,antPositions,length,incTime);
+            gameTotalTime = creepingGame.startGame(antStatus,gameStatusResult,antPositions,length,incTime);
 //            测试用
-            System.out.println(gameResult);
+            System.out.println(gameTotalTime);
 
-            minTime = Math.min(minTime, gameResult);
-            maxTime = Math.max(maxTime, gameResult);
+            minTime = Math.min(minTime, gameTotalTime);
+            maxTime = Math.max(maxTime, gameTotalTime);
         }
         System.out.println(minTime);
         System.out.println(maxTime);
     }
 
-    //   use temporary data to simulate
+//   use temporary data to simulate
 //   this will be the @controller function interact with front stage
 //    这个方法需要在playRoom被创建后调用
+//   这个方法需要重写
     @Override
     public void getInputConfiguration() {
 //        start = true;

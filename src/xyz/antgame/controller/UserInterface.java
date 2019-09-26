@@ -1,8 +1,10 @@
 package xyz.antgame.controller;
 
+import xyz.antgame.domain.GameResultSet;
+
 public interface UserInterface {
-    void startGame();
-    void startSimulation();
+    GameResultSet startGame();
+    GameResultSet startSimulation();
     void printResult();
     void getInputConfiguration();
 }
