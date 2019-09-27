@@ -18,9 +18,12 @@ class PlayRoomTest {
     }
 
     @Test
+//     has defect!!
+//    java.lang.ArrayIndexOutOfBoundsException: Index 5 out of bounds for length 5
     void startGame(){
         PlayRoom playRoom = new PlayRoom();
         GameResultSet gameResultSet = new GameResultSet();
+        gameResultSet = playRoom.startGame();
         gameResultSet = playRoom.startGame();
         assertNotNull(gameResultSet);
         assertNotNull(gameResultSet.getGameStatusResult());
