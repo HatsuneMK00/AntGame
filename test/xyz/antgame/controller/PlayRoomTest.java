@@ -20,6 +20,7 @@ class PlayRoomTest {
     @Test
 //     has defect!!
 //    java.lang.ArrayIndexOutOfBoundsException: Index 5 out of bounds for length 5
+//    Fixed already, by clearing ant list every time the CreepingGame.startGame called
     void startGame(){
         PlayRoom playRoom = new PlayRoom();
         GameResultSet gameResultSet = new GameResultSet();
