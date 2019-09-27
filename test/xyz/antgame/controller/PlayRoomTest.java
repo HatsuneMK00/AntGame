@@ -12,9 +12,21 @@ class PlayRoomTest {
         PlayRoom playRoom = new PlayRoom();
         GameResultSet gameResultSet = new GameResultSet();
         gameResultSet = playRoom.startSimulation();
+
         assertNotNull(gameResultSet);
         assertNotNull(gameResultSet.getGameStatusResult());
         assertNotEquals(0,gameResultSet.getGameStatusResult().size());
+    }
+
+    @Test
+    void startSimulationTest(){
+        PlayRoom playRoom = new PlayRoom();
+        GameResultSet gameResultSet = new GameResultSet();
+        gameResultSet = playRoom.startSimulation();
+
+        while(gameResultSet.getGameDuration()!=-1){
+            gameResultSet = playRoom.startSimulation();
+        }
     }
 
     @Test
