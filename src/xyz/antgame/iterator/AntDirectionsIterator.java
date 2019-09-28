@@ -1,11 +1,11 @@
 package xyz.antgame.iterator;
 
-public class AntStatusIterator implements Iterator {
+public class AntDirectionsIterator implements Iterator {
     private int statusNum;
     private int antNum;
     private int index;
 
-    public AntStatusIterator(int antNum) {
+    public AntDirectionsIterator(int antNum) {
         this.statusNum = (int) Math.pow(2, antNum);
         this.antNum = antNum;
         this.index = 0;
@@ -30,6 +30,13 @@ public class AntStatusIterator implements Iterator {
         for (i = 0; i < antStatus.length; i++) {
             if(antStatus[i] == 0) antStatus[i] = -1;
         }
+//        ²âÊÔÓÃ
+//        for (int iAntStatus:antStatus
+//             ) {
+//            System.out.print(iAntStatus);
+//        }
+//        System.out.println();
+
         return antStatus;
     }
 }
