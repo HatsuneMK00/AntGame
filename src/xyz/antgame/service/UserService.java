@@ -4,7 +4,9 @@ import com.sun.source.doctree.SinceTree;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import xyz.antgame.controller.PlayRoom;
 import xyz.antgame.controller.UserInterface;
@@ -17,13 +19,15 @@ import xyz.antgame.iterator.AntDirectionsIterator;
 
 
 //      注意前端传值的时候 所有数字间用空格分隔
+//      解决前后端不知道怎么出来的 跨域访问问题
+@CrossOrigin
 @Controller
 public class UserService implements UserInterface {
     private PlayRoom playRoom;
 
     @Override
     @ResponseBody
-    @RequestMapping("/startGame")
+    @RequestMapping(value = "/startGame")
     public GameResultSet startGame(UserRequest userRequest) {
         if (playRoom == null) {
             this.playRoom = new PlayRoom();
@@ -78,7 +82,7 @@ public class UserService implements UserInterface {
 
     @Override
     @ResponseBody
-    @RequestMapping("/startSimulation")
+    @RequestMapping(value = "/startSimulation")
     public GameResultSet startSimulation(UserRequest userRequest) {
         if (playRoom == null) {
             this.playRoom = new PlayRoom();
@@ -120,7 +124,7 @@ public class UserService implements UserInterface {
     }
 
     @Override
-    @RequestMapping("/reset")
+    @RequestMapping(value = "/reset")
     public void resetSimulationStatus() {
         playRoom.setAntDirectionsIterator(null);
     }

@@ -7,6 +7,15 @@ public class GameResultSet {
     private ArrayList<Integer[]> gameStatusResult;
     private int minTime;
     private int maxTime;
+    private int poleLength;
+
+    public int getPoleLength() {
+        return poleLength;
+    }
+
+    public void setPoleLength(int poleLength) {
+        this.poleLength = poleLength;
+    }
 
     public int getGameDuration() {
         return gameDuration;

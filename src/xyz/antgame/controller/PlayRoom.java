@@ -133,6 +133,7 @@ public class PlayRoom{
 //            此时的minTime和maxTime为最终的min和max结果
             gameResultSet.setGameDuration(-1);
         }
+        gameResultSet.setPoleLength(poleLength);
 
         return gameResultSet;
     }
@@ -156,6 +157,7 @@ public class PlayRoom{
         gameResultSet.setGameStatusResult(gameStatusResult);
         gameResultSet.setMaxTime(-1);
         gameResultSet.setMinTime(-1);
+        gameResultSet.setPoleLength(poleLength);
 
         return gameResultSet;
     }
