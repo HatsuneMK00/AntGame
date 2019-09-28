@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"
+        type="text/javascript"></script>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+        $(document).ready(function(){
+            let dom_str = '<span class="ant" id="ant_{id}" style="left:{left}px"><img src="images/ant.jpg" style="height: 80px;width: 80px;"></span>';
+            let base_left = $("#pole").position().left;
+            let length = 1100-$("#pole").position().left;
+            // console.log($("#pole").position());
+            // console.log(length);
+            // console.log(base_left);
+
+            function create_ant(id, left){//生成单只蚂蚁
+                return dom_str.replace('{id}', id).replace('{left}', left)
+            }
+
+            function create_ants(n) {//生成蚂蚁
+
+                let box_html = '';
+                for (let i = 0; i < n; i++) {
+                    let temp_left = base_left + length/4*(i+1);//随机位置
+                    box_html += create_ant(i, temp_left)
+                }
+                console.log(box_html);
+                $(".container").html(box_html)//生成实验杆蚂蚁
+            }
+            create_ants(5);
+        })
+    </script>
+</head>
+<body>
+<body>
+<h1 align="middle">蚂蚁爬杆实验</h1>
+<div class="card">
+    <h3>控制台</h3>
+    <div>
+        <div class="card-console">
+            <label>蚂蚁数量：<input type="text" id='ant_num' value="5"></label>
+            <label>移动步长(px)：<input type="text" id='speed' value="1"></label>
+            <label>移动时间间隔(ms)：<input type="text" id='time_interval' value="20"></label>
+        </div>
+        <div class="card-console">
+            <button class="btn-console" id='start'>暂停</button>
+            <button class="btn-console" id='restart'>重新开始</button>
+        </div>
+    </div>
+</div>
+
+<div class="container" style="height: 50px;width: 1000px">
+
+</div>
+<div>
+    <img id="pole" src="images/pole.jpg" height="50"; width="1000">
+</div>
+
+<style>
+    #pole{
+        position : absolute;
+        left: 100px;
+        top: 250px;
+    }
+    .container {
+        height: 20px;
+        width: 1000px;
+        background-color: white;
+        position : absolute;
+        left: 100px;
+        top: 240px;
+    }
+    .ant{
+        position: absolute;
+        height: 19px;
+        width: 19px;
+    }
+
+</style>
+</body>
+</html>

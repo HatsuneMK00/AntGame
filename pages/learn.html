@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <meta http-equiv="content-type"
+          content="text/html"; charset="UTF-8"/>
+    <title>
+        This is our AntGame
+    </title>
+    <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"
+            type="text/javascript"></script>
+    <script type="text/javascript">
+        window.TIMER = 'no_timer';//-1代表没有定时器
+
+        function compare(o1, o2){//特定的比较器，比较style中的left
+            return o1.position().left - o2.position().left
+        }
+        $(document).ready(function(){
+
+            let base_left = $("#pole").position().left;
+            let length = 1000;
+            let dom_str = '<span class="ant" id="ant_{id}" style="left:{left}px"><img src="images/ant.jpg" style="height: 30px;width: 30px;"></span>';
+
+
+            $("#start").click(function(){//启动暂停按钮何二为一了
+                if($(this).text()=='继续'){//继续程序
+                    create_timer();
+                    $(this).text('暂停');
+                    return
+                }
+                delete_timer();
+                $(this).text('继续')
+            });
+
+            $("#restart").click(function(){//启动定时器
+                $("#start").text('暂停');
+                init();
+                delete_timer();
+                create_timer()
+            });
+
+            function create_timer(){
+                if(TIMER != 'no_timer')
+                    return;
+                TIMER = window.setInterval(ants_move, TIME_INTERVAL)//生成定时器
+            }
+
+            function delete_timer(){
+                if(TIMER == 'no_timer')
+                    return
+                window.clearInterval(TIMER)//清除定时器
+                window.TIMER = 'no_timer'
+            }
+
+            function init(){
+                let ant_num = parseInt($("#ant_num").val());            //需要传入蚂蚁数量
+                window.TIME_INTERVAL = parseInt($("#time_interval").val());
+                create_ants(ant_num)
+            }
+
+            init();
+
+            create_timer();
+
+            function create_ant(id, left){//生成单只蚂蚁
+                let temp_dom = dom_str.replace('{id}', id).replace('{left}', left);
+                return temp_dom
+            }
+
+            function create_ants(n) {//生成蚂蚁
+
+                let box_html = '';
+                for (let i = 0; i < n; i++) {
+                    let temp_left = (length/(n+1))*i-12;         //从输入中获取
+                    box_html += create_ant(i, temp_left);
+                }
+                $(".container").html(box_html)//生成实验杆蚂蚁
+            }
+
+            function single_move(dom, pos){//单个蚂蚁移动
+                //   需要传入每个蚂蚁的位置pos
+                let re_pos=parseInt($("#pole_length").val());
+                pos=pos/re_pos*1000;
+                dom.css('left', pos)
+            }
+
+            function ants_move(){//所有蚂蚁移动
+                let ants = [];
+                $('#container>.ant').each(function(){//实验杆移动
+                    let dom = $(this);
+                    single_move(dom);
+                    destroy_dom(dom);
+                    ants.push(dom);
+                })
+
+            }
+
+            function destroy_dom(dom){//删除不在杆上的蚂蚁
+                let r = parseInt(dom.width())/2;
+                let left = dom.position().left;
+                if(left<base_left-r || left>base_left+length-r)
+                    dom.remove()
+            }
+
+        })
+
+
+
+    </script>
+</head>
+<body>
+    <h1 align="middle">蚂蚁爬杆实验</h1>
+    <div class="card">
+        <h3>控制台</h3>
+        <div>
+            <div class="card-console">
+                <label>蚂蚁数量：<input type="text" id='ant_num' value="5"></label>
+                <label>杆长：<input type="text" id='pole_length' value="300"></label>
+                <label>每步的移动时间(ms)：<input type="text" id='time_interval' value="20"></label>
+            </div>
+            <div class="card-console">
+                <button class="btn-console" id='start'>暂停</button>
+                <button class="btn-console" id='restart'>重新开始</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="container" style="height: 50px;width: 1000px">
+
+    </div>
+    <div>
+        <img id="pole" src="images/pole.jpg" height="50"; width="1000">
+    </div>
+
+<style>
+    #pole{
+        position : absolute;
+        left: 100px;
+        top: 250px;
+    }
+    .container {
+        height: 20px;
+        width: 1000px;
+        background-color: white;
+        position : absolute;
+        left: 100px;
+        top: 250px;
+    }
+    .ant{
+        position: absolute;
+        height: 5px;
+        width: 5px;
+        z-index: 2;
+    }
+
+</style>
+
+</body>
+</html>
