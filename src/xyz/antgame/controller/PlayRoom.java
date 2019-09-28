@@ -8,10 +8,9 @@ import xyz.antgame.iterator.AntDirectionsIterator;
 
 import java.util.ArrayList;
 
-@Controller
 public class PlayRoom{
     private CreepingGame creepingGame;
-//    迭代方向用的迭代器
+//    迭代方向用的迭代器 一轮模拟用同一个迭代器
     private AntDirectionsIterator antDirectionsIterator;
     //    start属性我感觉不需要 我先把他去掉了 ---guo
 //    private boolean start
@@ -97,7 +96,7 @@ public class PlayRoom{
         this.antDirections = antDirections;
     }
 
-    //    前端需要提供 “开始游戏”以及“开始下一个”的按钮用于调用这个函数
+//    前端需要提供 “开始游戏”以及“开始下一个”的按钮用于调用这个函数
 //    开始按钮用get方式请求/startGame
 //    这个函数每按一次按钮调用一次
     public GameResultSet startSimulation() {
@@ -111,6 +110,12 @@ public class PlayRoom{
         GameResultSet gameResultSet = new GameResultSet();
 
         if ((antDirections = buildAntDirections()) != null) {
+            //        测试用
+        for (int iAntDirections:antDirections
+             ) {
+            System.out.print(iAntDirections);
+        }
+        System.out.println();
             // CreepingGame 的内部方法需要修改gameStatusResult为一个结果集（二维数组）
             gameTotalTime = creepingGame.startGame(antDirections,gameStatusResult,antPositions,poleLength,incTime);
 //            测试用
@@ -129,15 +134,12 @@ public class PlayRoom{
             gameResultSet.setGameDuration(-1);
         }
 
-
         return gameResultSet;
     }
 
-    //    前端需要提供一个“自定义游戏”按钮用于执行这个函数
+//    前端需要提供一个“自定义游戏”按钮用于执行这个函数
 //    这个方法用于执行用户指定的情况
 //    需要显示过程 调用startGame函数
-    @ResponseBody
-    @RequestMapping("/startGame")
     public GameResultSet startGame() {
         if (this.creepingGame == null) {
             // 如果没有creepGame对象 创建一个默认的CreepGame对象

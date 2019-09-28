@@ -30,6 +30,13 @@ public class AntDirectionsIterator implements Iterator {
         for (i = 0; i < antStatus.length; i++) {
             if(antStatus[i] == 0) antStatus[i] = -1;
         }
+//        ²âÊÔÓÃ
+//        for (int iAntStatus:antStatus
+//             ) {
+//            System.out.print(iAntStatus);
+//        }
+//        System.out.println();
+
         return antStatus;
     }
 }
