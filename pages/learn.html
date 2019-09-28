@@ -112,17 +112,17 @@
     <h1 align="middle">蚂蚁爬杆实验</h1>
     <div class="card">
         <h3>控制台</h3>
-        <div>
+        <form method="post">
             <div class="card-console">
-                <label>蚂蚁数量：<input type="text" id='ant_num' value="5"></label>
-                <label>杆长：<input type="text" id='pole_length' value="300"></label>
+                <label>蚂蚁数量：<input type="text" id='ant_num' value="5" name="antNum"></label>
+                <label>杆长：<input type="text" id='pole_length' value="300" name="poleLength"></label>
                 <label>每步的移动时间(ms)：<input type="text" id='time_interval' value="20"></label>
             </div>
             <div class="card-console">
                 <button class="btn-console" id='start'>暂停</button>
                 <button class="btn-console" id='restart'>重新开始</button>
             </div>
-        </div>
+        </form>
     </div>
 
     <div class="container" style="height: 50px;width: 1000px">
