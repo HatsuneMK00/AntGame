@@ -1,4 +1,4 @@
-package xyz.antgame.controller;
+package xyz.antgame.service;
 
 import org.junit.jupiter.api.Test;
 import xyz.antgame.domain.GameResultSet;
@@ -10,7 +10,7 @@ class PlayRoomTest {
     @Test
     void startSimulation() {
         PlayRoom playRoom = new PlayRoom();
-        GameResultSet gameResultSet = new GameResultSet();
+        GameResultSet gameResultSet;
         gameResultSet = playRoom.startSimulation();
 
         assertNotNull(gameResultSet);

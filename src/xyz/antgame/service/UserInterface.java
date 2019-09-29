@@ -1,7 +1,7 @@
-package xyz.antgame.controller;
+package xyz.antgame.service;
 
 import xyz.antgame.domain.GameResultSet;
-import xyz.antgame.service.UserRequest;
+import xyz.antgame.domain.UserRequest;
 
 public interface UserInterface {
     GameResultSet startGame(UserRequest userRequest);

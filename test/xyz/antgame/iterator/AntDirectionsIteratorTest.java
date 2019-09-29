@@ -1,8 +1,7 @@
 package xyz.antgame.iterator;
 
 import org.junit.jupiter.api.Test;
-import xyz.antgame.controller.AntDirections;
-import xyz.antgame.controller.AntDirections;
+import xyz.antgame.service.AntDirections;
 
 class AntDirectionsIteratorTest {
 
