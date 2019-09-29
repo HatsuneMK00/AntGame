@@ -52,7 +52,7 @@
         function single_move(dom, round){//单个蚂蚁移动
             //   需要传入每个蚂蚁的位置pos
             let num = parseInt(dom.text());
-            // console.log(num);`
+             console.log(game_result_set.gameStatusResult[round][num]);
             let pos= game_result_set.gameStatusResult[round][num]*por-12.5;
             dom.css('left', pos)
         }
@@ -61,7 +61,7 @@
             $('#box>.ant').each(function(){//实验杆移动
                 let dom = $(this);
                 single_move(dom, game_round);
-                // console.log(TIMER);
+                //console.log(TIMER);
                 destroy_dom(dom,game_round);
             });
             game_round++;
@@ -79,6 +79,7 @@
         // function test() {
         //     console.log($("#ant_num").val());
         // }
+
 
         function requestServer(url) {
             let ant_num = $("#ant_num").val();
@@ -133,14 +134,14 @@
                 // $('#box>.ant').each(function () {
                 //     console.log($(this).text());
                 // })
+
+
             })
         }
 
     window.TIMER = 'no_timer';//-1代表没有定时器
 
-        function compare(o1, o2){//特定的比较器，比较style中的left
-            return o1.position().left - o2.position().left
-        }
+
 
 
 
@@ -158,13 +159,14 @@
                 <label>每步的移动时间(ms)：<input type="text" id='time_interval' value="20" name="incTime"></label>
                 <label>蚂蚁初识方向（空格分隔）<input type="text" id='ant_directions' value="-1 -1 1 1 1" name="antDirections"></label>
                 <label>蚂蚁初识位置（空格分隔 小于长度）<input type="text" id='ant_positions' value="30 60 90 120 150" name="antPositions"></label>
+                //<label>最小时间： <output type="text" id='min_time' value="game_set_result.minTime" name="minTime"> </output> </label>
             </div>
             <div class="card-console">
                 <button class="btn-console" id="start_game" onclick="requestServer('http://localhost:8080/AntGame_war_exploded/startGame')">开始自定义模拟</button>
                 <button class="btn-console" id="start_simulation" onclick="requestServer('http://localhost:8080/AntGame_war_exploded/startSimulation')">开始模拟所有情况/下一种情况</button>
                 <button class="btn-console" id="reset" onclick="requestServer('http://localhost:8080/AntGame_war_exploded/reset')">重置模拟（回到最初的情况）</button>
-<!--                <button class="btn-console" id='start'>暂停</button>-->
-<!--                <button class="btn-console" id='restart'>重新开始</button>-->
+                                <!--                <button class="btn-console" id='start'>暂停</button>-->
+                <!--                <button class="btn-console" id='restart'>重新开始</button>-->
             </div>
         </div>
     </div>
@@ -172,14 +174,15 @@
     <div class="container" id="box" style="height: 50px;width: 1000px">
     </div>
     <div>
-        <img id="pole" src="images/pole.jpg" height="50"; width="1000">
+        <img id="pole" src="images/pole.jpg" height="20"; width="1000">
     </div>
+
 
 <style>
     #pole{
         position : absolute;
         left: 100px;
-        top: 250px;
+        top: 270px;
     }
     .container {
         height: 20px;
