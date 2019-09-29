@@ -120,6 +120,7 @@ public class UserController implements UserInterface {
     }
 
     @Override
+    @ResponseBody
     @RequestMapping(value = "/reset")
     public void resetSimulationStatus() {
         playRoom.setAntDirectionsIterator(null);

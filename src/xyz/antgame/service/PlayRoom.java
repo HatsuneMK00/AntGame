@@ -191,14 +191,6 @@ public class PlayRoom{
         System.out.println(maxTime);
     }
 
-//   use temporary data to simulate
-//   this will be the @controller function interact with front stage
-//    这个方法需要在playRoom被创建后调用
-//   这个方法需要重写
-    public void getInputConfiguration() {
-//        start = true;
-    }
-
     //    这个函数使用一个AntStatus对象用于迭代全部的蚂蚁起始方向情况
 //    AntStatus对象使用迭代器模式 返回一个数组，数组下标代表蚂蚁编号 1代表朝右 0代表朝左
 //    当所有情况迭代完成后 该函数返回null

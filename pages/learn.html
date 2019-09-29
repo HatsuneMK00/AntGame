@@ -2,8 +2,8 @@
 <html>
 <head>
 
-    <meta http-equiv="content-type"
-          content="text/html" charset="UTF-8"/>
+    <meta charset="UTF-8"
+          content="text/html" http-equiv="content-type"/>
     <title>
         This is our AntGame
     </title>
@@ -17,8 +17,8 @@
         let por;
 
 
-        $("#start").click(function(){//启动暂停按钮何二为一了
-            if($(this).text()=='继续'){//继续程序
+        $("#start").click(function () {//启动暂停按钮何二为一了
+            if ($(this).text() == '继续') {//继续程序
                 create_timer();
                 $(this).text('暂停');
                 return
@@ -27,50 +27,49 @@
             $(this).text('继续')
         });
 
-        $("#restart").click(function(){//启动定时器
+        $("#restart").click(function () {//启动定时器
             $("#start").text('暂停');
             init();
             delete_timer();
             create_timer();
         });
 
-        function create_timer(){
-            if(TIMER != 'no_timer')
+        function create_timer() {
+            if (TIMER != 'no_timer')
                 return;
             TIMER = window.setInterval(ants_move, TIME_INTERVAL)//生成定时器
         }
 
-        function delete_timer(){
-            if(TIMER == 'no_timer')
+        function delete_timer() {
+            if (TIMER == 'no_timer')
                 return
             window.clearInterval(TIMER)//清除定时器
             window.TIMER = 'no_timer'
         }
 
 
-
-        function single_move(dom, round){//单个蚂蚁移动
+        function single_move(dom, round) {//单个蚂蚁移动
             //   需要传入每个蚂蚁的位置pos
             let num = parseInt(dom.text());
-             console.log(game_result_set.gameStatusResult[round][num]);
-            let pos= game_result_set.gameStatusResult[round][num]*por-12.5;
+            console.log(game_result_set.gameStatusResult[round][num]);
+            let pos = game_result_set.gameStatusResult[round][num] * por - 12.5;
             dom.css('left', pos)
         }
 
-        function ants_move(){//所有蚂蚁移动
-            $('#box>.ant').each(function(){//实验杆移动
+        function ants_move() {//所有蚂蚁移动
+            $('#box>.ant').each(function () {//实验杆移动
                 let dom = $(this);
                 single_move(dom, game_round);
                 //console.log(TIMER);
-                destroy_dom(dom,game_round);
+                destroy_dom(dom, game_round);
             });
             game_round++;
         }
 
-        function destroy_dom(dom, round){//删除不在杆上的蚂蚁
+        function destroy_dom(dom, round) {//删除不在杆上的蚂蚁
             let num = parseInt(dom.text());
 
-            if(game_result_set.gameStatusResult[round][num] === -1){
+            if (game_result_set.gameStatusResult[round][num] === -1) {
                 console.log("delete ant");
                 dom.remove()
             }
@@ -82,147 +81,167 @@
         // }
 
 
+        function requestServerReset() {
+            jQuery.getJSON('http://localhost:8080/AntGame_war_exploded/reset',
+                function (data) {
+                    $("#min_time").val("");
+                    $("#max_time").val("");
+                    $("#iterator_index").val("");
+                    $("#game_duration").val("");
+                })
+        }
+
         function requestServer(url) {
             let ant_num = $("#ant_num").val();
             console.log(url);
             jQuery.getJSON(url,
-            {
-                "antNum": ant_num,
-                "poleLength": $("#pole_length").val(),
-                "incTime": $("#time_interval").val(),
-                "antDirections": $("#ant_directions").val(),
-                "antPositions": $("#ant_positions").val()
-            },
-            function (data) {
-                game_round = 0;
-                let base_left = $("#pole").position().left;
+                {
+                    "antNum": ant_num,
+                    "poleLength": $("#pole_length").val(),
+                    "incTime": $("#time_interval").val(),
+                    "antDirections": $("#ant_directions").val(),
+                    "antPositions": $("#ant_positions").val()
+                },
+                function (data) {
+                    game_round = 0;
+                    let base_left = $("#pole").position().left;
 
-                let dom_str = '<span class="ant" id="ant_{id}" style="left:{left}px">{number}<img src="images/ant.jpg" style="height: 30px;width: 30px;"></span>';
+                    let dom_str = '<span class="ant" id="ant_{id}" style="left:{left}px">{number}<img src="images/ant.jpg" style="height: 30px;width: 30px;"></span>';
 
-                //console.log(base_left);
+                    //console.log(base_left);
 
-                function init(){
-                    let ant_num = parseInt($("#ant_num").val());            //需要传入蚂蚁数量
-                    window.TIME_INTERVAL = parseInt($("#time_interval").val());
-                    create_ants(ant_num);
-                }
-
-
-                function create_ant(id, left){//生成单只蚂蚁
-                    let temp_dom = dom_str.replace('{id}', id).replace('{left}', left).replace('{number}',id);
-                    return temp_dom
-                }
-
-                function create_ants(n) {//生成蚂蚁
-
-                    let box_html = '';
-                    for (let i = 0; i < n; i++) {
-                        let temp_left = data.gameStatusResult[0][i] * por-12.5;         //从输入中获取
-                        box_html += create_ant(i, temp_left);
+                    function init() {
+                        let ant_num = parseInt($("#ant_num").val());            //需要传入蚂蚁数量
+                        window.TIME_INTERVAL = parseInt($("#time_interval").val());
+                        create_ants(ant_num);
                     }
-                    $(".container").html(box_html)//生成实验杆蚂蚁
-                }
-
-                // 为结果区赋值
-                let iteration_index = data.iteratorIndex;
-                let min_time = data.minTime;
-                let max_time = data.maxTime;
-                let game_duration = data.gameDuration;
-
-                if(iteration_index!==-1) {
-                    $("#min_time").val(min_time);
-                    $("#max_time").val(max_time);
-                    $("#iterator_index").val(iteration_index);
-                }else{
-                    $("#min_time").val("单次模拟没有最小值");
-                    $("#max_time").val("单次模拟没有最大值");
-                    $("#iterator_index").val("1");
-                }
-                if(game_duration!==-1){
-                    $("#game_duration").val(game_duration);
-                }else{
-                    $("#game_duration").val("没有");
-                }
-
-                init();
 
 
-                create_timer();
+                    function create_ant(id, left) {//生成单只蚂蚁
+                        let temp_dom = dom_str.replace('{id}', id).replace('{left}', left).replace('{number}', id);
+                        return temp_dom
+                    }
+
+                    function create_ants(n) {//生成蚂蚁
+
+                        let box_html = '';
+                        for (let i = 0; i < n; i++) {
+                            let temp_left = data.gameStatusResult[0][i] * por - 12.5;         //从输入中获取
+                            box_html += create_ant(i, temp_left);
+                        }
+                        $(".container").html(box_html)//生成实验杆蚂蚁
+                    }
+
+                    // 为结果区赋值
+                    let iteration_index = data.iteratorIndex;
+                    let min_time = data.minTime;
+                    let max_time = data.maxTime;
+                    let game_duration = data.gameDuration;
+
+                    if (iteration_index !== -1) {
+                        $("#min_time").val(min_time);
+                        $("#max_time").val(max_time);
+                        $("#iterator_index").val(iteration_index);
+                    } else {
+                        $("#min_time").val("单次模拟没有最小值");
+                        $("#max_time").val("单次模拟没有最大值");
+                        $("#iterator_index").val("1");
+                    }
+                    if (game_duration !== -1) {
+                        $("#game_duration").val(game_duration);
+                    } else {
+                        $("#game_duration").val("没有");
+                    }
+
+                    init();
 
 
-                let pole_length = data.poleLength;
-                game_result_set = data;
-                por = length/pole_length;
-
-                // console.log($("span.ant"));
-
-                // $('#box>.ant').each(function () {
-                //     console.log($(this).text());
-                // })
+                    create_timer();
 
 
-            })
+                    let pole_length = data.poleLength;
+                    game_result_set = data;
+                    por = length / pole_length;
+
+                    // console.log($("span.ant"));
+
+                    // $('#box>.ant').each(function () {
+                    //     console.log($(this).text());
+                    // })
+
+
+                })
         }
 
-    window.TIMER = 'no_timer';//-1代表没有定时器
-
-
-
-
+        window.TIMER = 'no_timer';//-1代表没有定时器
 
 
     </script>
 </head>
 <body>
-    <h1 align="middle">蚂蚁爬杆实验</h1>
-    <div class="card">
-        <h3>控制台</h3>
-        <div>
-            <div class="card-console">
-                <label>蚂蚁数量：<input type="text" id='ant_num' value="5" name="antNum"></label><br>
-                <label>杆长：<input type="text" id='pole_length' value="300" name="poleLength"></label><br>
-                <label>每步的移动时间(ms)：<input type="text" id='time_interval' value="30" name="incTime"></label><br>
-                <label>蚂蚁初始方向（空格分隔）<input type="text" id='ant_directions' value="-1 -1 1 1 1" name="antDirections"></label><br>
-                <label>蚂蚁初始位置（空格分隔 小于长度）<input type="text" id='ant_positions' value="30 60 90 120 150" name="antPositions"></label>
-            </div>
-            <div class="card-console">
-                <button class="btn-console" id="start_game" onclick="requestServer('http://localhost:8080/AntGame_war_exploded/startGame')">开始自定义模拟</button>
-                <button class="btn-console" id="start_simulation" onclick="requestServer('http://localhost:8080/AntGame_war_exploded/startSimulation')">开始模拟所有情况/下一种情况</button>
-                <button class="btn-console" id="reset" onclick="requestServer('http://localhost:8080/AntGame_war_exploded/reset')">重置模拟（回到最初的情况）</button>
-                <!--                <button class="btn-console" id='start'>暂停</button>-->
-                <!--                <button class="btn-console" id='restart'>重新开始</button>-->
-            </div>
+<h1 align="middle">蚂蚁爬杆实验</h1>
+<div class="card">
+    <h3>控制台</h3>
+    <div>
+        <div class="card-console">
+            <label>蚂蚁数量：<input id='ant_num' name="antNum" type="text" value="5"></label><br>
+            <label>杆长：<input id='pole_length' name="poleLength" type="text" value="300"></label><br>
+            <label>每步的移动时间(ms)：<input id='time_interval' name="incTime" type="text" value="30"></label><br>
+            <label>蚂蚁初始方向（空格分隔）<input id='ant_directions' name="antDirections" type="text"
+                                      value="-1 -1 1 1 1"></label><br>
+            <label>蚂蚁初始位置（空格分隔 小于长度）<input id='ant_positions' name="antPositions" type="text" value="30 60 90 120 150"></label>
         </div>
-        <div>
-<!--            <label id="game_duration">游戏总时长：{gameDuration}</label>-->
+        <div class="card-console">
+            <button class="btn-console" id="start_game"
+                    onclick="requestServer('http://localhost:8080/AntGame_war_exploded/startGame')">开始自定义模拟
+            </button>
+            <button class="btn-console" id="start_simulation"
+                    onclick="requestServer('http://localhost:8080/AntGame_war_exploded/startSimulation')">开始模拟所有情况/下一种情况
+            </button>
+            <button class="btn-console" id="reset" onclick="requestServerReset()">重置模拟（回到最初的情况）</button>
+            <!--                <button class="btn-console" id='start'>暂停</button>-->
+            <!--                <button class="btn-console" id='restart'>重新开始</button>-->
         </div>
     </div>
+    <div>
+        <!--            <label id="game_duration">游戏总时长：{gameDuration}</label>-->
+    </div>
+</div>
 
-    <div class="flashInterface">
-        <div class="container" id="box" style="height: 50px;width: 1000px">
-        </div>
-        <div>
-            <img id="pole" src="images/pole.jpg" height="20"; width="1000">
-        </div>
+<div class="flashInterface">
+    <div class="container" id="box" style="height: 50px;width: 1000px">
     </div>
-    <div class="result-container">
-        <h3>结果列表</h3>
-        <div>
-        <label>游戏时长：      <output id="game_duration"></output></label><br>
-        <label>模拟轮次：      <output id="iterator_index"></output></label><br>
-        <label>最大时间：      <output id="max_time"></output></label><br>
-        <label>最小时间：      <output id="min_time"></output></label>
-        </div>
+    <div>
+        <img ; height="20" id="pole" src="images/pole.jpg" width="1000">
     </div>
+</div>
+<div class="result-container">
+    <h3>结果列表</h3>
+    <div>
+        <label>游戏时长：
+            <output id="game_duration"></output>
+        </label><br>
+        <label>模拟轮次：
+            <output id="iterator_index"></output>
+        </label><br>
+        <label>最大时间：
+            <output id="max_time"></output>
+        </label><br>
+        <label>最小时间：
+            <output id="min_time"></output>
+        </label>
+    </div>
+</div>
 <style>
-    .card{
+    .card {
         background: #8be88038;
         padding: 10px;
         margin: 10px;
         border-radius: 10px;
         box-shadow: 0px 0px 2px #000;
     }
-    .flashInterface{
+
+    .flashInterface {
         height: 100px;
         width: 1225px;
         background: #8be88038;
@@ -230,20 +249,23 @@
         box-shadow: 0px 0px 2px #000;
         margin: 10px;
     }
+
     .container {
         height: 20px;
         width: 1000px;
 
-        position : absolute;
+        position: absolute;
         left: 100px;
         top: 380px;
     }
-    #pole{
-        position : absolute;
+
+    #pole {
+        position: absolute;
         left: 100px;
         top: 400px;
     }
-    .ant{
+
+    .ant {
         background-color: #8be88038;
         position: absolute;
         height: 5px;
@@ -251,12 +273,13 @@
         bottom: 68px;
         z-index: 2;
     }
-    .card-console{
+
+    .card-console {
         margin: 10px;
     }
 
-    .result-container{
-        position : absolute;
+    .result-container {
+        position: absolute;
         left: 0px;
         top: 420px;
         background: #8be88038;
@@ -265,7 +288,6 @@
         border-radius: 10px;
         box-shadow: 0px 0px 2px #000;
     }
-
 
 
 </style>
