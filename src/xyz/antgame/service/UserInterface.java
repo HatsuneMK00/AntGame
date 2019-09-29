@@ -6,5 +6,5 @@ import xyz.antgame.domain.UserRequest;
 public interface UserInterface {
     GameResultSet startGame(UserRequest userRequest);
     GameResultSet startSimulation(UserRequest userRequest);
-    void resetSimulationStatus();
+    GameResultSet resetSimulationStatus();
 }

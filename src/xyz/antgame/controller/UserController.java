@@ -122,9 +122,10 @@ public class UserController implements UserInterface {
     @Override
     @ResponseBody
     @RequestMapping(value = "/reset")
-    public void resetSimulationStatus() {
+    public GameResultSet resetSimulationStatus() {
         playRoom.setAntDirectionsIterator(null);
         playRoom.setMinTime(Integer.MAX_VALUE);
         playRoom.setMaxTime(Integer.MIN_VALUE);
+        return new GameResultSet();
     }
 }
