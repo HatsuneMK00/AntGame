@@ -179,10 +179,10 @@
         <h3>控制台</h3>
         <div>
             <div class="card-console">
-                <label>蚂蚁数量：<input type="text" id='ant_num' value="5" name="antNum"></label>
-                <label>杆长：<input type="text" id='pole_length' value="300" name="poleLength"></label>
-                <label>每步的移动时间(ms)：<input type="text" id='time_interval' value="20" name="incTime"></label>
-                <label>蚂蚁初始方向（空格分隔）<input type="text" id='ant_directions' value="-1 -1 1 1 1" name="antDirections"></label>
+                <label>蚂蚁数量：<input type="text" id='ant_num' value="5" name="antNum"></label><br>
+                <label>杆长：<input type="text" id='pole_length' value="300" name="poleLength"></label><br>
+                <label>每步的移动时间(ms)：<input type="text" id='time_interval' value="30" name="incTime"></label><br>
+                <label>蚂蚁初始方向（空格分隔）<input type="text" id='ant_directions' value="-1 -1 1 1 1" name="antDirections"></label><br>
                 <label>蚂蚁初始位置（空格分隔 小于长度）<input type="text" id='ant_positions' value="30 60 90 120 150" name="antPositions"></label>
             </div>
             <div class="card-console">
@@ -198,39 +198,75 @@
         </div>
     </div>
 
-    <div class="container" id="box" style="height: 50px;width: 1000px">
-    </div>
-    <div>
-        <img id="pole" src="images/pole.jpg" height="20"; width="1000">
+    <div class="flashInterface">
+        <div class="container" id="box" style="height: 50px;width: 1000px">
+        </div>
+        <div>
+            <img id="pole" src="images/pole.jpg" height="20"; width="1000">
+        </div>
     </div>
     <div class="result-container">
+        <h3>结果列表</h3>
+        <div>
         <label>游戏时长：      <output id="game_duration"></output></label><br>
-        <label>模拟轮次：      <output id="iterator_index"></output></label>
-        <label>最大时间：      <output id="max_time"></output></label>
+        <label>模拟轮次：      <output id="iterator_index"></output></label><br>
+        <label>最大时间：      <output id="max_time"></output></label><br>
         <label>最小时间：      <output id="min_time"></output></label>
+        </div>
     </div>
-
 <style>
+    .card{
+        background: #8be88038;
+        padding: 10px;
+        margin: 10px;
+        border-radius: 10px;
+        box-shadow: 0px 0px 2px #000;
+    }
+    .flashInterface{
+        height: 100px;
+        width: 1225px;
+        background: #8be88038;
+        border-radius: 10px;
+        box-shadow: 0px 0px 2px #000;
+        margin: 10px;
+    }
+    .container {
+        height: 20px;
+        width: 1000px;
+
+        position : absolute;
+        left: 100px;
+        top: 380px;
+    }
     #pole{
         position : absolute;
         left: 100px;
         top: 400px;
     }
-    .container {
-        height: 20px;
-        width: 1000px;
-        background-color: white;
-        position : absolute;
-        left: 100px;
-        top: 380px;
-    }
     .ant{
+        background-color: #8be88038;
         position: absolute;
         height: 5px;
         width: 5px;
         bottom: 68px;
         z-index: 2;
     }
+    .card-console{
+        margin: 10px;
+    }
+
+    .result-container{
+        position : absolute;
+        left: 0px;
+        top: 420px;
+        background: #8be88038;
+        padding: 20px;
+        margin: 20px;
+        border-radius: 10px;
+        box-shadow: 0px 0px 2px #000;
+    }
+
+
 
 </style>
 
