@@ -31,6 +31,9 @@ public class Pole {
     public void setAntList(ArrayList<Ant> antList) {
         this.antList = antList;
         count = antList.size();
+        for(Ant ant : antList){
+            map[ant.getPosition()]+=1;
+        }
     }
     public void changeAntCount(int tem){
         count += tem;
