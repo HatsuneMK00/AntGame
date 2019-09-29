@@ -1,4 +1,4 @@
-package xyz.antgame.service;
+package xyz.antgame.domain;
 
 public class UserRequest {
     private int antNum;

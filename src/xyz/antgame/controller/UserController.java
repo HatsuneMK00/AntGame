@@ -1,17 +1,13 @@
-package xyz.antgame.service;
+package xyz.antgame.controller;
 
-import com.sun.source.doctree.SinceTree;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import xyz.antgame.controller.PlayRoom;
-import xyz.antgame.controller.UserInterface;
+import xyz.antgame.service.PlayRoom;
+import xyz.antgame.service.UserInterface;
 import xyz.antgame.domain.GameResultSet;
-import xyz.antgame.iterator.AntDirectionsIterator;
+import xyz.antgame.domain.UserRequest;
 
 //    这个类感觉应该不需要 用户接口应该有PlayRoom来实现
 //      输入还是需要与playRoom分离 否则逻辑比较奇怪
@@ -22,7 +18,7 @@ import xyz.antgame.iterator.AntDirectionsIterator;
 //      解决前后端不知道怎么出来的 跨域访问问题
 @CrossOrigin
 @Controller
-public class UserService implements UserInterface {
+public class UserController implements UserInterface {
     private PlayRoom playRoom;
 
     @Override

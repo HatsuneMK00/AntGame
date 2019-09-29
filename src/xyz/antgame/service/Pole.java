@@ -1,4 +1,4 @@
-package xyz.antgame.controller;
+package xyz.antgame.service;
 
 import java.util.ArrayList;
 
@@ -22,16 +22,16 @@ public class Pole {
         map = new int[length+1];
     }
     public boolean hasCollision(int position){
-        if(map[position]>1) return true;
         if(position==0) return map[position+1]>0;
         if (position==length) return map[position-1]>0;
         if(map[position-1]+map[position+1]>0) return true;
+        if(map[position]>1) return true;
         return false;
     }
     public void setAntList(ArrayList<Ant> antList) {
         this.antList = antList;
         count = antList.size();
-        for(Ant ant:antList){
+        for(Ant ant : antList){
             map[ant.getPosition()]+=1;
         }
     }

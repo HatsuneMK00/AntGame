@@ -1,4 +1,4 @@
-package xyz.antgame.controller;
+package xyz.antgame.service;
 
 import org.junit.jupiter.api.Test;
 import xyz.antgame.domain.GameResultSet;

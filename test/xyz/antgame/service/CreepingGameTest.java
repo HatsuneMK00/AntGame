@@ -1,8 +1,6 @@
-package xyz.antgame.controller;
+package xyz.antgame.service;
 
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class CreepingGameTest {
 
