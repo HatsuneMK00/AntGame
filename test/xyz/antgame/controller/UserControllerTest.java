@@ -56,6 +56,23 @@ class UserControllerTest {
         assertEquals(gameResultSet2.getGameDuration(), gameResultSet.getGameDuration());
     }
 
+    @Test
+    void allSimulation(){
+        UserRequest userRequest = new UserRequest();
+        userRequest.setAntNum(5);
+        userRequest.setIncTime(1);
+        userRequest.setAntPositions("30 60 90 120 150");
+        userRequest.setPoleLength(200);
+        UserController userController = new UserController();
+        GameResultSet gameResultSet = new GameResultSet();
+        gameResultSet = userController.startSimulation(userRequest);
+        System.out.print(gameResultSet.getGameDuration() + " ");
+        while(gameResultSet.getGameDuration()!=-1){
+            gameResultSet = userController.startSimulation(userRequest);
+            System.out.print(gameResultSet.getGameDuration() + " ");
+        }
+    }
+
 
     @Test
     void resetSimulationStatus() {

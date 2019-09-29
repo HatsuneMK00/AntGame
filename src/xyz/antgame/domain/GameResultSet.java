@@ -8,6 +8,15 @@ public class GameResultSet {
     private int minTime;
     private int maxTime;
     private int poleLength;
+    private int iteratorIndex;
+
+    public int getIteratorIndex() {
+        return iteratorIndex;
+    }
+
+    public void setIteratorIndex(int iteratorIndex) {
+        this.iteratorIndex = iteratorIndex;
+    }
 
     public int getPoleLength() {
         return poleLength;

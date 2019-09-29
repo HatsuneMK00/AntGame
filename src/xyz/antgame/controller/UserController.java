@@ -123,5 +123,7 @@ public class UserController implements UserInterface {
     @RequestMapping(value = "/reset")
     public void resetSimulationStatus() {
         playRoom.setAntDirectionsIterator(null);
+        playRoom.setMinTime(Integer.MAX_VALUE);
+        playRoom.setMaxTime(Integer.MIN_VALUE);
     }
 }

@@ -5,6 +5,10 @@ public class AntDirectionsIterator implements Iterator {
     private int antNum;
     private int index;
 
+    public int getIndex() {
+        return index;
+    }
+
     public AntDirectionsIterator(int antNum) {
         this.statusNum = (int) Math.pow(2, antNum);
         this.antNum = antNum;

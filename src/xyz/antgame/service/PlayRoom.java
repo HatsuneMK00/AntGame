@@ -13,8 +13,8 @@ public class PlayRoom{
 //    private boolean start
     private int incTime;
     private int antNum;
-    private int maxTime;
-    private int minTime;
+    private int maxTime = Integer.MIN_VALUE;
+    private int minTime = Integer.MAX_VALUE;
     private int poleLength;
 //    用于存放游戏中蚂蚁的初始位置
     private int[] antPositions;
@@ -124,12 +124,16 @@ public class PlayRoom{
             gameResultSet.setGameStatusResult(gameStatusResult);
             gameResultSet.setMaxTime(maxTime);
             gameResultSet.setMinTime(minTime);
+            gameResultSet.setIteratorIndex(antDirectionsIterator.getIndex());
         }else{
 //            表示所有情况都已经模拟完毕
 //            此时其他的值都不需要考虑
 //            此时的minTime和maxTime为最终的min和max结果
             gameResultSet.setGameDuration(-1);
+//            模拟完成以及重置模拟时需要重置相关的变量
             antDirectionsIterator = null;
+            minTime = Integer.MAX_VALUE;
+            maxTime = Integer.MIN_VALUE;
         }
         gameResultSet.setPoleLength(poleLength);
 
@@ -156,6 +160,7 @@ public class PlayRoom{
         gameResultSet.setMaxTime(-1);
         gameResultSet.setMinTime(-1);
         gameResultSet.setPoleLength(poleLength);
+        gameResultSet.setIteratorIndex(-1);
 
         return gameResultSet;
     }
