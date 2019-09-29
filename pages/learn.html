@@ -161,8 +161,8 @@
             </div>
             <div class="card-console">
                 <button class="btn-console" id="start_game" onclick="requestServer('http://localhost:8080/AntGame_war_exploded/startGame')">开始自定义模拟</button>
-                <button class="btn-console" id="start_simulation">开始模拟所有情况/下一种情况</button>
-                <button class="btn-console" id="reset">重置模拟（回到最初的情况）</button>
+                <button class="btn-console" id="start_simulation" onclick="requestServer('http://localhost:8080/AntGame_war_exploded/startSimulation')">开始模拟所有情况/下一种情况</button>
+                <button class="btn-console" id="reset" onclick="requestServer('http://localhost:8080/AntGame_war_exploded/reset')">重置模拟（回到最初的情况）</button>
 <!--                <button class="btn-console" id='start'>暂停</button>-->
 <!--                <button class="btn-console" id='restart'>重新开始</button>-->
             </div>
