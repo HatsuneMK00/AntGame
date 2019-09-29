@@ -10,7 +10,7 @@ class PlayRoomTest {
     @Test
     void startSimulation() {
         PlayRoom playRoom = new PlayRoom();
-        GameResultSet gameResultSet = new GameResultSet();
+        GameResultSet gameResultSet;
         gameResultSet = playRoom.startSimulation();
 
         assertNotNull(gameResultSet);
