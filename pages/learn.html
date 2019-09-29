@@ -76,6 +76,7 @@
             }
 
         }
+
         // function test() {
         //     console.log($("#ant_num").val());
         // }
@@ -122,13 +123,22 @@
                     $(".container").html(box_html)//生成实验杆蚂蚁
                 }
 
+                function minTime() {
+                    var min;
+                    min.getElementById("min_time").val(data.minTime);
+                }
+
 
                 init();
 
+
                 create_timer();
+
+
                 let pole_length = data.poleLength;
                 game_result_set = data;
                 por = length/pole_length;
+
                 // console.log($("span.ant"));
 
                 // $('#box>.ant').each(function () {
@@ -154,12 +164,12 @@
         <h3>控制台</h3>
         <div>
             <div class="card-console">
-                <label>蚂蚁数量：<input type="text" id='ant_num' value="5" name="antNum"></label>
-                <label>杆长：<input type="text" id='pole_length' value="300" name="poleLength"></label>
-                <label>每步的移动时间(ms)：<input type="text" id='time_interval' value="20" name="incTime"></label>
-                <label>蚂蚁初识方向（空格分隔）<input type="text" id='ant_directions' value="-1 -1 1 1 1" name="antDirections"></label>
-                <label>蚂蚁初识位置（空格分隔 小于长度）<input type="text" id='ant_positions' value="30 60 90 120 150" name="antPositions"></label>
-                //<label>最小时间： <output type="text" id='min_time' value="game_set_result.minTime" name="minTime"> </output> </label>
+                <label>蚂蚁数量：<input type="text" id='ant_num' value="5" name="antNum"><br></label>
+                <label>杆长：<input type="text" id='pole_length' value="300" name="poleLength"><br></label>
+                <label>每步的移动时间(ms)：<input type="text" id='time_interval' value="40" name="incTime"><br></label>
+                <label>蚂蚁初识方向（空格分隔）<input type="text" id='ant_directions' value="-1 -1 1 1 1" name="antDirections"><br></label>
+                <label>蚂蚁初识位置（空格分隔 小于长度）<input type="text" id='ant_positions' value="30 60 90 120 150" name="antPositions"><br></label>
+                <!--<label>最小时间： <output type="text" id="min_time" value="" name="minTime"></output></label>-->
             </div>
             <div class="card-console">
                 <button class="btn-console" id="start_game" onclick="requestServer('http://localhost:8080/AntGame_war_exploded/startGame')">开始自定义模拟</button>
@@ -176,13 +186,15 @@
     <div>
         <img id="pole" src="images/pole.jpg" height="20"; width="1000">
     </div>
-
+    <div>
+        <label>最大时间： <output type="text" id="max_time" >
+    </div>
 
 <style>
     #pole{
         position : absolute;
         left: 100px;
-        top: 270px;
+        top: 400px;
     }
     .container {
         height: 20px;
@@ -190,7 +202,7 @@
         background-color: white;
         position : absolute;
         left: 100px;
-        top: 250px;
+        top: 380px;
     }
     .ant{
         position: absolute;
