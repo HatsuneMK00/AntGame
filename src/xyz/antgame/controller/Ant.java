@@ -24,6 +24,13 @@ public class Ant {
         return position>pole.getLength()||position<0;
     }
     public int move(){
+        if(isBeyond()){
+            pole.destroyAnt(this);
+            position=-1;
+            return position;
+        }
+        if(pole.hasCollision(position))
+            changeDirection();
         pole.positionMinus(position);
         position += direction;
         if(isBeyond()){

@@ -30,7 +30,7 @@ class UserServiceTest {
 //        一号蚂蚁不会转弯
         for (Integer[] round:gameStatusResult
              ) {
-            System.out.print(round[0]);
+            System.out.println(round[0]);
         }
     }
 
