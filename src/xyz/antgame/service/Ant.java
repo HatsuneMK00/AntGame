@@ -1,4 +1,4 @@
-package xyz.antgame.controller;
+package xyz.antgame.service;
 
 public class Ant {
     private int position;

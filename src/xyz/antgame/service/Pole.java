@@ -1,4 +1,4 @@
-package xyz.antgame.controller;
+package xyz.antgame.service;
 
 import java.util.ArrayList;
 

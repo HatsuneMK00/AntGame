@@ -1,7 +1,6 @@
-package xyz.antgame.controller;
+package xyz.antgame.service;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class CreepingGame {
     private int totalTime;

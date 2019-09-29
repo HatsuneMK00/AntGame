@@ -1,8 +1,5 @@
-package xyz.antgame.controller;
+package xyz.antgame.service;
 
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import xyz.antgame.domain.GameResultSet;
 import xyz.antgame.iterator.AntDirectionsIterator;
 

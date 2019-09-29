@@ -1,4 +1,4 @@
-package xyz.antgame.controller;
+package xyz.antgame.service;
 
 import xyz.antgame.iterator.Aggregate;
 import xyz.antgame.iterator.AntDirectionsIterator;
