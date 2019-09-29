@@ -16,10 +16,10 @@ class UserControllerTest {
     @Test
     void startGame() {
         UserRequest userRequest = new UserRequest();
-        userRequest.setAntDirections("1 1 1 -1 -1");
+        userRequest.setAntDirections("1 -1 1 -1 -1");
         userRequest.setAntNum(5);
         userRequest.setIncTime(1);
-        userRequest.setAntPositions("30 60 90 120 150");
+        userRequest.setAntPositions("30 30 90 120 150");
         userRequest.setPoleLength(200);
         UserController userController = new UserController();
         GameResultSet gameResultSet;

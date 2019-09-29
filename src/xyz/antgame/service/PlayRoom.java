@@ -107,12 +107,12 @@ public class PlayRoom{
         GameResultSet gameResultSet = new GameResultSet();
 
         if ((antDirections = buildAntDirections()) != null) {
-            //        测试用
-        for (int iAntDirections:antDirections
-             ) {
-            System.out.print(iAntDirections);
-        }
-        System.out.println();
+//        测试用
+//        for (int iAntDirections:antDirections
+//             ) {
+//            System.out.print(iAntDirections);
+//        }
+//        System.out.println();
             // CreepingGame 的内部方法需要修改gameStatusResult为一个结果集（二维数组）
             gameTotalTime = creepingGame.startGame(antDirections,gameStatusResult,antPositions,poleLength,incTime);
 //            测试用
@@ -129,6 +129,7 @@ public class PlayRoom{
 //            此时其他的值都不需要考虑
 //            此时的minTime和maxTime为最终的min和max结果
             gameResultSet.setGameDuration(-1);
+            antDirectionsIterator = null;
         }
         gameResultSet.setPoleLength(poleLength);
 
