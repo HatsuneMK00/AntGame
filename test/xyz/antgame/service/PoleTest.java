@@ -1,7 +1,9 @@
-package xyz.antgame.controller;
+package xyz.antgame.service;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.test.context.TestExecutionListeners;
+import xyz.antgame.service.Ant;
+import xyz.antgame.service.Pole;
 
 import java.util.ArrayList;
 

@@ -1,6 +1,7 @@
 package xyz.antgame.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class CreepingGame {
     private int totalTime;
@@ -13,6 +14,12 @@ public class CreepingGame {
     }
 
     public int startGame(int[] antDirections, ArrayList<Integer[]> result, int[] positions, int length, int incTime) {
+        HashMap<Integer,Integer> map = new HashMap<>();
+        for(int position : positions){
+            if(map.containsKey(position))
+                return -1;
+            map.put(position,1);
+        }
         antList.clear();
         totalTime = 0;
         Integer[] framePositions = new Integer[antDirections.length];
