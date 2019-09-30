@@ -112,7 +112,8 @@
 
                     function init() {
                         let ant_num = parseInt($("#ant_num").val());            //需要传入蚂蚁数量
-                        window.TIME_INTERVAL = parseInt($("#time_interval").val());
+                        // window.TIME_INTERVAL = parseInt($("#time_interval").val());
+                        window.TIME_INTERVAL = 30;
                         create_ants(ant_num);
                     }
 
@@ -134,9 +135,9 @@
 
                     // 为结果区赋值
                     let iteration_index = data.iteratorIndex;
-                    let min_time = data.minTime;
-                    let max_time = data.maxTime;
-                    let game_duration = data.gameDuration;
+                    let min_time = data.minTime.toFixed(2);
+                    let max_time = data.maxTime.toFixed(2);
+                    let game_duration = data.gameDuration.toFixed(2);
 
                     if (iteration_index !== -1) {
                         $("#min_time").val(min_time);
@@ -186,10 +187,10 @@
         <div class="card-console">
             <label>蚂蚁数量：<input id='ant_num' name="antNum" type="text" value="5"></label><br>
             <label>杆长：<input id='pole_length' name="poleLength" type="text" value="300"></label><br>
-            <label>每步的移动时间(ms)：<input id='time_interval' name="incTime" type="text" value="30"></label><br>
+            <label>每秒移动距离(单位长度)：<input id='time_interval' name="incTime" type="text" value="5"></label><br>
             <label>蚂蚁初始方向（空格分隔）<input id='ant_directions' name="antDirections" type="text"
                                       value="-1 -1 1 1 1"></label><br>
-            <label>蚂蚁初始位置（空格分隔 小于长度）<input id='ant_positions' name="antPositions" type="text" value="30 60 90 120 150"></label>
+            <label>蚂蚁初始位置（空格分隔 小于长度）<input id='ant_positions' name="antPositions" type="text" value="30 80 110 160 250"></label>
         </div>
         <div class="card-console">
             <button class="btn-console" id="start_game"

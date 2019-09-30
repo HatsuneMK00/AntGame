@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class CreepingGame {
-    private int totalTime;
+    private double totalTime;
     private Pole pole;
     private ArrayList<Ant> antList;
 
@@ -13,7 +13,7 @@ public class CreepingGame {
         antList = new ArrayList<>();
     }
 
-    public int startGame(int[] antDirections, ArrayList<Integer[]> result, int[] positions, int length, int incTime) {
+    public double startGame(int[] antDirections, ArrayList<Integer[]> result, int[] positions, int length, double incTime) {
         HashMap<Integer,Integer> map = new HashMap<>();
         for(int position : positions){
             if(map.containsKey(position))

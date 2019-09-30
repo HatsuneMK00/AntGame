@@ -7,13 +7,13 @@ public class UserRequest {
     private String antPositions;
     //    用于存放游戏中蚂蚁的初始方向
     private String antDirections;
-    private int incTime;
+    private double incTime;
 
-    public int getIncTime() {
+    public double getIncTime() {
         return incTime;
     }
 
-    public void setIncTime(int incTime) {
+    public void setIncTime(double incTime) {
         this.incTime = incTime;
     }
 

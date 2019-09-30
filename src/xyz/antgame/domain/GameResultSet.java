@@ -3,10 +3,10 @@ package xyz.antgame.domain;
 import java.util.ArrayList;
 
 public class GameResultSet {
-    private int gameDuration;
+    private double gameDuration;
     private ArrayList<Integer[]> gameStatusResult;
-    private int minTime;
-    private int maxTime;
+    private double minTime;
+    private double maxTime;
     private int poleLength;
     private int iteratorIndex;
 
@@ -26,14 +26,6 @@ public class GameResultSet {
         this.poleLength = poleLength;
     }
 
-    public int getGameDuration() {
-        return gameDuration;
-    }
-
-    public void setGameDuration(int gameDuration) {
-        this.gameDuration = gameDuration;
-    }
-
     public ArrayList<Integer[]> getGameStatusResult() {
         return gameStatusResult;
     }
@@ -42,19 +34,27 @@ public class GameResultSet {
         this.gameStatusResult = gameStatusResult;
     }
 
-    public int getMinTime() {
+    public double getGameDuration() {
+        return gameDuration;
+    }
+
+    public void setGameDuration(double gameDuration) {
+        this.gameDuration = gameDuration;
+    }
+
+    public double getMinTime() {
         return minTime;
     }
 
-    public void setMinTime(int minTime) {
+    public void setMinTime(double minTime) {
         this.minTime = minTime;
     }
 
-    public int getMaxTime() {
+    public double getMaxTime() {
         return maxTime;
     }
 
-    public void setMaxTime(int maxTime) {
+    public void setMaxTime(double maxTime) {
         this.maxTime = maxTime;
     }
 }

@@ -11,10 +11,10 @@ public class PlayRoom{
     private AntDirectionsIterator antDirectionsIterator;
     //    start属性我感觉不需要 我先把他去掉了 ---guo
 //    private boolean start
-    private int incTime;
+    private double incTime;
     private int antNum;
-    private int maxTime = Integer.MIN_VALUE;
-    private int minTime = Integer.MAX_VALUE;
+    private double maxTime = -1;
+    private double minTime = Integer.MAX_VALUE;
     private int poleLength;
 //    用于存放游戏中蚂蚁的初始位置
     private int[] antPositions;
@@ -37,11 +37,11 @@ public class PlayRoom{
         this.antDirectionsIterator = antDirectionsIterator;
     }
 
-    public int getIncTime() {
+    public double getIncTime() {
         return incTime;
     }
 
-    public void setIncTime(int incTime) {
+    public void setIncTime(double incTime) {
         this.incTime = incTime;
     }
 
@@ -53,19 +53,19 @@ public class PlayRoom{
         this.antNum = antNum;
     }
 
-    public int getMaxTime() {
+    public double getMaxTime() {
         return maxTime;
     }
 
-    public void setMaxTime(int maxTime) {
+    public void setMaxTime(double maxTime) {
         this.maxTime = maxTime;
     }
 
-    public int getMinTime() {
+    public double getMinTime() {
         return minTime;
     }
 
-    public void setMinTime(int minTime) {
+    public void setMinTime(double minTime) {
         this.minTime = minTime;
     }
 
@@ -102,7 +102,7 @@ public class PlayRoom{
             this.creepingGame = new CreepingGame();
         }
         int[] antDirections;
-        int gameTotalTime = 0;
+        double gameTotalTime = 0;
         ArrayList<Integer[]> gameStatusResult = new ArrayList<Integer[]>();
         GameResultSet gameResultSet = new GameResultSet();
 
@@ -148,7 +148,7 @@ public class PlayRoom{
             // 如果没有creepGame对象 创建一个默认的CreepGame对象
             this.creepingGame = new CreepingGame();
         }
-        int gameTotalTime = 0;
+        double gameTotalTime = 0;
         ArrayList<Integer[]> gameStatusResult = new ArrayList<>();
 
         gameTotalTime = creepingGame.startGame(antDirections,gameStatusResult,antPositions,poleLength,incTime);
@@ -163,32 +163,6 @@ public class PlayRoom{
         gameResultSet.setIteratorIndex(-1);
 
         return gameResultSet;
-    }
-
-
-//    当前端选择了直接显示模拟结果的时候 调用这个函数
-//    按照道理来说 对于同一个PlayRoom类对象iterator应该是同一个 因此可以直接在这边继续迭代
-    public void printResult() {
-//        处理请求参数
-        this.incTime = 1;
-        this.antNum = 5;
-        int length = 200;
-        int[] antStatus;
-//        处理结束
-        int gameTotalTime;
-        ArrayList<Integer[]> gameStatusResult = null;
-
-        while ((antStatus = buildAntDirections()) != null) {
-            // CreepingGame 的内部方法需要修改gameStatusResult为一个结果集（二维数组）
-            gameTotalTime = creepingGame.startGame(antStatus,gameStatusResult,antPositions,length,incTime);
-//            测试用
-            System.out.println(gameTotalTime);
-
-            minTime = Math.min(minTime, gameTotalTime);
-            maxTime = Math.max(maxTime, gameTotalTime);
-        }
-        System.out.println(minTime);
-        System.out.println(maxTime);
     }
 
     //    这个函数使用一个AntStatus对象用于迭代全部的蚂蚁起始方向情况

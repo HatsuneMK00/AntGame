@@ -28,8 +28,10 @@ public class UserController implements UserInterface {
         if (playRoom == null) {
             this.playRoom = new PlayRoom();
         }
-        int antNum, incTime, poleLength, i;
+        int antNum, poleLength, i;
         GameResultSet gameResultSet;
+
+        double incTime;
 
         int [] antPositions;
         int [] antDirections;
@@ -40,6 +42,7 @@ public class UserController implements UserInterface {
 //        处理请求
             antNum = userRequest.getAntNum();
             incTime = userRequest.getIncTime();
+            incTime = 1 / incTime;
 //        处理结束
             antDirections = new int[antNum];
             antPositions = new int[antNum];
@@ -83,8 +86,9 @@ public class UserController implements UserInterface {
         if (playRoom == null) {
             this.playRoom = new PlayRoom();
         }
-        int antNum, incTime, poleLength, i;
+        int antNum, poleLength, i;
         GameResultSet gameResultSet;
+        double incTime;
 
         int [] antPositions;
 //        处理请求 当第二次传值时 暂时认为前端会把这些值一起传过来 但是不能更改
@@ -92,6 +96,9 @@ public class UserController implements UserInterface {
         if (userRequest.getAntPositions() != null) {
             antNum = userRequest.getAntNum();
             incTime = userRequest.getIncTime();
+//            incTime需要做额外处理 将每秒移动距离变为单位距离时间
+            incTime = 1 / incTime;
+
 //        处理结束
             antPositions = new int[antNum];
             //        处理请求
